@@ -23,4 +23,9 @@ export class UserService {
        const existingUser = await this.userRepository.findOne({ where: { _id:id} });
             return existingUser;
     }
+
+    findUserByEmail(email:string){
+        return this.userRepository.findOne({where: {email}});
+    }
+
 }
