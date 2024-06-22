@@ -1,5 +1,7 @@
+import { SerializedUserDto } from './../user/DTOs/SerializedUser.dto';
 import { Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
+import { comparePassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -10,8 +12,14 @@ export class AuthService {
             if(!user){
                 return null;
             }
-            console.log(user)
-            return user;
+            const hashPassword = user.password;
+            const rawPassword = password;
+            const isMath = await comparePassword(rawPassword, hashPassword);
+            if(isMath){
+                
+                return new SerializedUserDto(user);
+            }
+            return null;
             
         }
 }
