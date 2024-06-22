@@ -14,6 +14,8 @@ import entities from './TypeORM';
     database: 'type_orm',
     entities: entities,
     synchronize: true,
-  }), AuthModule],
+  }), AuthModule,
+  
+],
 })
 export class AppModule {}
